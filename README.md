@@ -1,29 +1,52 @@
-โค้ด `app.py` เวอร์ชันนี้ **ครบและสอดคล้องกับ search_backend แบบ B แล้ว** ไม่ต้องแก้อะไรเพิ่มครับ [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/108109695/b7df8e3d-3371-4ec1-873b-747bd09f18a8/search_backend.py)
+## Web Demo Overview
 
-สิ่งที่ตรงโจทย์แล้ว:
+This repository contains a simple **embedding-based search** web application built with Flask. [dev](https://dev.to/edenai/build-your-own-search-engine-api-with-flask-and-eden-ai-embeddings-57ml)
+Users can type a free-text query and retrieve the most relevant Reuters‑style financial sentences based on word embeddings. [geeksforgeeks](https://www.geeksforgeeks.org/nlp/word-embeddings-in-nlp/)
 
-- import `search_topk` ที่รับ `model_name` ✔  
-- ฟอร์มมี:
-  - ช่อง text `name="q"` รับ query ✔  
-  - `<select name="model">` ให้เลือก `glove` หรือ `skipgram_ns` และใช้ `selected` ตามค่าปัจจุบัน ✔  
-- route `/`:
-  - อ่าน `q` และ `model` จาก query string  
-  - ถ้ามี query → เรียก `search_topk(query, k=10, model_name=model_name)` ✔  
-  - ส่ง `query`, `results`, `model` เข้า template ✔  
-- แสดงผล:
-  - หัวข้อ `Results for "query" (model: model)` ✔  
-  - loop `results` แสดง `r.text` และ `score` แบบ format 4 ทศนิยม ✔  
+## Available Models
 
-จากนี้ถ้าไฟล์อื่นพร้อมแล้ว (`models.py`, `search_backend.py`, `prepare_context_embeddings.py`, `.pt`, `.pkl`, `.npy`, `.txt`) ขั้นตอนรันคือ:
+The app supports two embedding models for the search:
+
+- **Skip-gram (negative sampling)**: Trained Word2Vec Skip-gram model (`skipgram_ns`) that focuses on predicting surrounding context words for a given center word. [pmc.ncbi.nlm.nih](https://pmc.ncbi.nlm.nih.gov/articles/PMC8391962/)
+- **GloVe**: Pre-trained GloVe embeddings that learn word vectors from global word–cooccurrence statistics. [geeksforgeeks](https://www.geeksforgeeks.org/nlp/word-embeddings-in-nlp/)
+
+On the web interface, you can choose the model from a dropdown menu:
+
+- `glove`  
+- `skipgram_ns`
+
+The current selection is preserved when you submit a new query.
+
+## How to Run
+
+From the assignment folder:
 
 ```bash
-cd "C:\Users\Legion 5 Pro\OneDrive\Documents\NLP\assignment\A1"
+cd "C:\Users\Legion 5 Pro\OneDrive\Documents\NLP\assignment\NLP_A1"
 
-# ถ้ายังไม่รันเตรียม context
+# Prepare context embeddings (only needed the first time)
 python prepare_context_embeddings.py
 
-# รันเว็บ
+# Run the Flask app
 python app.py
 ```
 
-แล้วเปิด `http://127.0.0.1:5000/` พิมพ์ query + เลือกโมเดลได้เลยครับ [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/108109695/b0348039-57b4-4cef-839e-8849e2cdf338/app.py)
+Then open:
+
+```text
+http://127.0.0.1:5000/
+```
+
+Type your query, choose either **Skip-gram** or **GloVe**, and press **Search**.
+
+## Example Screenshots
+
+### Skip-gram → query: `cash`
+![alt text](figure/skipgram_example.png)
+
+
+### GloVe → query: `cash`
+![alt text](figure/glove_example.png)
+
+
+These examples show how different embedding models retrieve slightly different but still semantically related financial sentences for the same query. [machinelearningmastery](https://machinelearningmastery.com/example-applications-of-text-embedding/)
