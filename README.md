@@ -1,4 +1,5 @@
 ## Web Demo Overview
+- By st124876
 
 This repository contains a simple **embedding-based search** web application built with Flask. [dev](https://dev.to/edenai/build-your-own-search-engine-api-with-flask-and-eden-ai-embeddings-57ml)
 Users can type a free-text query and retrieve the most relevant Reuters‑style financial sentences based on word embeddings. [geeksforgeeks](https://www.geeksforgeeks.org/nlp/word-embeddings-in-nlp/)
