@@ -1,0 +1,23 @@
+# Bytecode / cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Large / raw datasets not needed for grading
+dataset/instructions.txt
+dataset/set1.csv
+dataset/set2.csv
+dataset/wordsim353.zip
+
+# Old / working notebooks (ถ้าอยากเก็บแค่เวอร์ชันสุดท้าย)
+notebooks/A1.ipynb
+notebooks/A1_v2.ipynb
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
